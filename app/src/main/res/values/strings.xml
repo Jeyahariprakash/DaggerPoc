@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Dagger Poc</string>
+    <string name="motor_scope_name">Root</string>
+</resources>
