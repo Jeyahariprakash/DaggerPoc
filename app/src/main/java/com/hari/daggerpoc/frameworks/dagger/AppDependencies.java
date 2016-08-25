@@ -15,4 +15,6 @@ public interface AppDependencies {
 
     Utils utils();
 
+    ResponseCache responseCache();
+
 }
