@@ -8,27 +8,18 @@ import com.hari.daggerpoc.frameworks.dagger.AppDependencies;
 import com.hari.daggerpoc.frameworks.dagger.DaggerScope;
 import com.hari.daggerpoc.frameworks.dagger.DaggerService;
 
-import javax.inject.Singleton;
-
 import dagger.Provides;
 import mortar.MortarScope;
 
 public class App extends Application {
 
-    private static Context context;
-
     private MortarScope mortarScope;
-
-    public static Context getContext() {
-        return context;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Component component = DaggerApp_Component.create();
+        Component component = DaggerApp_Component.builder().appModule(new AppModule(this)).build();
         component.inject(this);
-        context = getApplicationContext();
         mortarScope = MortarScope.buildRootScope().withService(DaggerService.SERVICE_NAME, component).build(getResources().getString(R.string.motor_scope_name));
     }
 
@@ -37,20 +28,28 @@ public class App extends Application {
         return mortarScope.hasService(name) ? mortarScope.getService(name) : super.getSystemService(name);
     }
 
-    @dagger.Component(modules = {Module.class})
+    @dagger.Component(modules = {AppModule.class})
     @DaggerScope(Component.class)
     public interface Component extends AppDependencies {
 
         void inject(App app);
+
+        Context context();
     }
 
     @dagger.Module
-    public class Module {
+    @DaggerScope(App.Component.class)
+    public class AppModule {
+
+        private App app;
+
+        public AppModule(App app){
+            this.app = app;
+        }
 
         @Provides
-        @Singleton
         Context provideApplicationContext() {
-            return getApplicationContext();
+            return app.getApplicationContext();
         }
     }
 

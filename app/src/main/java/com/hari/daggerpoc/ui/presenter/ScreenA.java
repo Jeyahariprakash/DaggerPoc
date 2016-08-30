@@ -72,14 +72,17 @@ public class ScreenA extends Path implements ScreenComponentFactory<MainActivity
         private String errorMessage = "";
 
         @Inject
-        Presenter() {
-
+        Presenter(Context context) {
+            this.context = context;
         }
 
         @Override
         protected void onLoad(Bundle savedInstanceState) {
             super.onLoad(savedInstanceState);
-            context = getView().getContext();
+            if(context!= null){
+                Log.e("Screen A" , "Context is not null");
+            }
+            //context = getView().getContext();
                 restClient.getService(WeatherService.class).getConfiguration().enqueue(configServiceCallback);
 
 
