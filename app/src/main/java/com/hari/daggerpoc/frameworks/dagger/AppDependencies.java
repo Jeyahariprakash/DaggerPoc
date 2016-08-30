@@ -1,6 +1,8 @@
 package com.hari.daggerpoc.frameworks.dagger;
 
 
+import android.content.Context;
+
 import com.hari.daggerpoc.cache.ResponseCache;
 import com.hari.daggerpoc.utils.Utils;
 
@@ -13,5 +15,7 @@ public interface AppDependencies {
     Utils utils();
 
     ResponseCache responseCache();
+
+    Context context();
 
 }

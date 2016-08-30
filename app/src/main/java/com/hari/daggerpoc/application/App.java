@@ -34,7 +34,6 @@ public class App extends Application {
 
         void inject(App app);
 
-        Context context();
     }
 
     @dagger.Module
