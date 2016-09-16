@@ -19,6 +19,8 @@ import com.hari.daggerpoc.ui.view.ViewB;
 import javax.inject.Inject;
 
 import dagger.Provides;
+import flow.Flow;
+import flow.History;
 import flow.path.Path;
 import mortar.ViewPresenter;
 
@@ -28,7 +30,7 @@ import mortar.ViewPresenter;
 @Layout(R.layout.screen_b)
 public class ScreenB extends Path implements ScreenComponentFactory<MainActivity.Component> {
 
-    private String value = "";
+    private static String value = "";
 
     public ScreenB(String value) {
         this.value = value;
@@ -74,22 +76,24 @@ public class ScreenB extends Path implements ScreenComponentFactory<MainActivity
         protected void onLoad(Bundle savedInstanceState) {
             super.onLoad(savedInstanceState);
             context = getView().getContext();
-            Log.d("ScreenB","Finger print manager-->"+fingerprintManager);
-            Log.d("ScreenB","value-->"+value);
-            Log.d("ScreenB","Response cache -->"+responseCache);
+            Log.d("ScreenB","Entered Value-->"+value);
+            getView().textView.setText(value);
+        }
 
+        public void moveToNext(){
+            Flow.get(context).setHistory(History.single(new ScreenB(getView().editText.getText().toString())), Flow.Direction.FORWARD);
         }
 
 
     }
 
     @dagger.Module
-    public class Module {
+    public static class Module {
 
         @Provides
         @DaggerScope(Component.class)
-        public Presenter providesPresenter() {
-            return new Presenter(value);
+        public String provideValue() {
+            return value;
         }
 
     }

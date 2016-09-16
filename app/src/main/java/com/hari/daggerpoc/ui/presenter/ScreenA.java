@@ -79,7 +79,7 @@ public class ScreenA extends Path implements ScreenComponentFactory<MainActivity
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
                 Log.d("ScreenA","Response data -->"+response.body().toString());
                 responseCache.setWeatherResponse(response.body());
-                Flow.get(context).setHistory(History.single(new ScreenB("object")), Flow.Direction.FORWARD);
+                Flow.get(context).setHistory(History.single(new ScreenB("Value Passed from previous Screen")), Flow.Direction.FORWARD);
             }
 
             @Override

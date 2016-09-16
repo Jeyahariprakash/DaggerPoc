@@ -1,5 +1,8 @@
 package com.hari.daggerpoc.service.rest;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hari.daggerpoc.constants.URLConstants;

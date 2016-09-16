@@ -5,8 +5,30 @@
               android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/screen_b_text_view"
+        android:layout_width="wrap_content"
         android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:text="Screen B"/>
+
+    <EditText
+        android:id="@+id/screen_b_edit_text"
+        android:layout_width="match_parent"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/screen_b_button"
+        android:layout_marginBottom="20dp"
+        android:hint="Enter something"/>
+
+    <Button
+        android:layout_centerInParent="true"
+        android:id="@+id/screen_b_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pass data to next screen"/>
 
 </com.hari.daggerpoc.ui.view.ViewB>
